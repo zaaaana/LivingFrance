@@ -6,6 +6,6 @@ finished date: 2020 May 29
 contributors: ALI Farzaana,YIN Fuzhen,GAOYufei, XU Linyang 
 
 
-see websites: 
+see websites: https://group6-2020.github.io/LivingFrance/
 
 
