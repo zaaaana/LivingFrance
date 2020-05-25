@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Time slider for airport passengers number in France </title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css" rel="stylesheet" />
+<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<style>
+.map-overlay {
+font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+position: absolute;
+width: 25%;
+top: 0;
+left: 0;
+padding: 10px;
+}
+
+.map-overlay .map-overlay-inner {
+background-color: #fff;
+box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+border-radius: 3px;
+padding: 10px;
+margin-bottom: 10px;
+}
+
+.map-overlay h2 {
+line-height: 24px;
+display: block;
+margin: 0 0 10px;
+}
+
+.map-overlay .legend .bar {
+height: 10px;
+width: 100%;
+background: linear-gradient(to right, #fca107, #7f3121);
+}
+
+.map-overlay input {
+background-color: transparent;
+display: inline-block;
+width: 100%;
+position: relative;
+margin: 0;
+cursor: ew-resize;
+}
+</style>
+
+<div id="map"></div>
+
+<div class="map-overlay top">
+<div class="map-overlay-inner">
+<h2>Number of airport passengers, 2007-2019 in France</h2>
+<label id="year"></label>
+<input id="slider" type="range" min="0" max="12" step="1" value="0" />
+</div>.eslintrc.js
+<div class="map-overlay-inner">
+<div id="legend" class="legend">
+<div class="bar"></div>
+<div>Magnitude</div>
+</div>
+</div>
+</div>
+
+
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script>
+	// TO MAKE THE MAP APPEAR YOU MUST
+	// ADD YOUR ACCESS TOKEN FROM
+	// https://account.mapbox.com
+	mapboxgl.accessToken = 'pk.eyJ1IjoieXVmZWlnYW8xNSIsImEiOiJjazczYXV5cTcwNnozM2ZwZmNhcDE5dnQ1In0.Os8gQ2WKoQe7ezepnGVvBA';
+var map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/yufeigao15/ckadmclqc0lm91ipoahedjy2h',
+center: [2.35183, 48.85658],
+zoom: 4.5
+});
+
+var year = [
+'2007',
+'2008',
+'2009',
+'2010',
+'2011',
+'2012',
+'2013',
+'2014',
+'2015',
+'2016',
+'2017',
+'2018',
+'2019'
+];
+
+function filterBy(year) {
+var filters = ['==', 'year', year];
+map.setFilter('airport passenger-circles', filters);
+map.setFilter('airport passenger-labels', filters);
+
+// Set the label to the month
+document.getElementById('year').textContent = year[year];
+}
+
+map.on('load', function() {
+	d3.csv(
+		'https://netdisk-pan.baidupcs.com/disk/docview?bdstoken=ead2e8d5b90a166799c2ffdd3d839c73&uk=1470404502&path=%2FFrenceData%2FFrenceData.csv',
+    function(err, data) {
+    if (err) throw err;
+
+// Create a month property value based on time
+// used to filter against.
+data.features = data.features.map(function(d) {
+d.properties.year = new Date(d.properties.time).getYear();
+return d;
+});
+
+let url = 'https://netdisk-pan.baidupcs.com/disk/docview?bdstoken=ead2e8d5b90a166799c2ffdd3d839c73&uk=1470404502&path=%2FFrenceData%2FFrenceData.csv';
+map.addSource('FrenceData', {
+'type': 'csv',
+data: url
+});
+
+
+map.addLayer({
+'id': 'air transport of passengers in Paris-circles',
+'type': 'circle',
+'source': 'FrenceData',
+'paint': {
+'circle-color': [
+'interpolate',
+['linear'],
+['get', 'air transport of passengers in Paris'],
+6,
+'#FCA107',
+8,
+'#7F3121'
+],
+'circle-opacity': 0.75,
+'circle-radius': [
+'interpolate',
+['linear'],
+['get', 'air transport of passengers in Paris'],
+6,
+20,
+8,
+40
+]
+}
+});
+
+map.addLayer({
+'id': 'air transport of passengers in Paris-labels',
+'type': 'symbol',
+'source': 'FrenceData',
+'layout': {
+'text-field': [
+'concat',
+['to-string', ['get', 'air transport of passengers in Paris']],
+'m'
+],
+'text-font': [
+'Open Sans Bold',
+'Arial Unicode MS Bold'
+],
+'text-size': 12
+},
+'paint': {
+'text-color': 'rgba(0,0,0,0.5)'
+}
+});
+
+// Set filter to first month of the year
+// 0 = January
+filterBy(0);
+
+document
+.getElementById('slider')
+.addEventListener('input', function(e) {
+var year = parseInt(e.target.value, 10);
+filterBy(year);
+});
+}
+);
+});
+</script>
+
+</body>
+</html>
