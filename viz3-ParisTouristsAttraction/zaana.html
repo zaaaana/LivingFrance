@@ -1,1 +1,627 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tourism in Paris' Most Popular Monuments</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>   
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css" rel="stylesheet" />
+<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+    
+ <script async="" src="//www.google-analytics.com/analytics.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/egg.js/1.0/egg.min.js"></script>
+    
+    <script type="text/javascript">
+        var egg = new Egg();
+        egg.addCode("r,a,h,u,l", function() {
+            jQuery('#egggif').fadeIn(500, function() {
+                window.setTimeout(function() { jQuery('#egggif').hide(); },
+                                  2000);
+            });
+        }, "konami-code");
+        egg.addHook(function(){
+            console.log("Hook called for: " + this.activeEgg.keys);
+            console.log(this.activeEgg.metadata);
+        });
+        egg.listen();
+        
+    </script>
+
+    <style type="text/css">
+    #egggif {position: absolute; top: 50%; left: 50%; display: none; }
+  </style>   
+
+</head>
+<body>
+    
+<style>
+    #map {
+        position: fixed;
+        width: 50%;
+    }
+    #features {
+        width: 50%;
+        margin-left: 50%;
+        font-family: sans-serif;
+        overflow-y: scroll;
+        background-color: #fafafa;
+    }
+    section {
+        padding: 25px 50px;
+        line-height: 25px;
+        border-bottom: 1px solid #ddd;
+        opacity: 0.25;
+        font-size: 13px;
+    }
+    section.active {
+        opacity: 1;
+    }
+    section:last-child {
+        border-bottom: none;
+        margin-bottom: 200px;
+    }
+</style>
+
+<div id="map"></div>
+    
+<div id="features">
+    <section id="notred" class="active">
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <h2> Tourism Figures for Places of Interest</h2>
+        Paris is the # 1 most visited destination for international tourists in the world.
+        The population of France is approximately 70 million, however the average number of international visitors
+        annually is at least 80 million:
+        
+        
+        <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawMain);
+
+      function drawMain() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Visitors'],
+          ['2008',  79.218000],
+          ['2009',  76.764000],
+          ['2010',  76.647000],
+          ['2011',  80.499000],
+          ['2012',  81.980000],
+          ['2013',  83.634000],
+          ['2014',  83.701000],
+          ['2015',  84.452000],
+          ['2016',  82.682000],
+          ['2017',  86.758000],
+          ['2018',  89.322000]
+        ]);
+
+        var options = {
+            
+          title: 'Annual International Visitors to France',
+          vAxis: { 
+              title: '# of visitors (in millions)'
+          },
+            
+            hAxis: {
+                title: "# of int'l visitors to France (inclusive of overnight flights)"
+            },
+            colors: ['#61C9A8'],
+            lineWidth: 3.5
+        };
+
+        var Main = new google.visualization.LineChart(document.getElementById('Main'));
+
+        Main.draw(data, options);
+      }
+    </script>
+    <div id="Main" style="width: 850px; float; border: solid black 1px" ></div>
+    <p> While the values remain consistent within the 75 - 90 million range, the dip in 
+        the number of visitors in 2016 comes as a result of the riots which occurred in 2015.
+        This incident, however, has not stopped the city nor the country from being one of the
+        most popular tourist destinations of the world, as visitor statistics quickly bounced back
+        the following year.</p>
+       <p> Below are the statistics of Paris' most visited monuments and places of interest:
+        </p>
+        </section>
+
+        <section id="notred" class="active">
+        <h3>Notre-Dame de Paris</h3>
+        
+        <p> The Notre-Dame de Paris is the most popular tourist attraction in all of Paris, 
+            where the cathedral boasts an annual average of 13 million visitors - approximately 36 thousand
+            visitors daily! This value, however, only accounts for about 15% of all international visitors annually.
+            Following the blaze which occurred in early 2019, the future of the cathedral, and what this meant 
+            for tourism in Paris seemed questionable. Though primary traders who rely on the cathedral's tourism
+            as income are directly affected by the economic impact of the fire,
+            there is no doubt that following its reopening to the public, the cathedral will continue to
+            share its legacy and retain its status as one of the most visited landmarks in the world.
+        </p>
+
+    </section>
+    <section id="pompidou">
+        <h3>Centre Pompidou</h3> 
+        <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart1);
+
+      function drawChart1() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Visitors'],
+          ['2013',  3700000],
+          ['2014',  3450000],
+          ['2015',  3060000],
+          ['2016',  330000],
+          ['2017',  3300000]
+        ]);
+
+        var options = {
+            
+          title: 'Annual Visitors to Centre Pompidou',
+          vAxis: { 
+              format: 'short' 
+          },
+            colors: ['#C6EBBE']
+        };
+
+        var chart1 = new google.visualization.LineChart(document.getElementById('chart1'));
+
+        chart1.draw(data, options);
+      }
+    </script>
+    <div id="chart1" style="width: 850px; float; border: solid black 1px" ></div>
+        <p>
+            The Centre Pompidou opened officially to the public on 02 February, 
+            1977, and quickly became one of the most popular cultural venues in 
+            France and worldwide. In 1997, former president Jean-Jacques Aillagon
+            approved renovation for expansion of the centre in order to include 
+            further gallery space and improved live performance facilities.
+            In 2000 after the official reopening, the Centre Pomidou was well
+            received with an influx of visitors, approximately 16000 daily.
+        </p>
+    </section>
+    <section id="louvre">
+        <h3>Louvre</h3>
+        
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart2);
+
+      function drawChart2() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Visitors'],
+          ['2008',  8500000],
+          ['2009',  8500000],
+          ['2010',  8500000],
+          ['2011',  8880000],
+          ['2012',  9720000],
+          ['2013',  9300000],
+          ['2014',  9260000],
+          ['2015',  8600000],
+          ['2016',  7300000],
+          ['2017',  8100000],
+          ['2018', 10200000]
+            
+        ]);
+
+        var options = {
+          title: 'Annual Visitors to Louvre',
+            vAxis:{
+                format: 'short'
+            },
+            colors: ['#A9DBB8']
+            
+        };
+
+        var chart2 = new google.visualization.LineChart(document.getElementById('chart2'));
+
+        chart2.draw(data, options);
+      }
+    </script>
+    <div id="chart2" style="width: 850px; float; border: solid black 1px"></div>
+    
+        <p>
+            Originally built as the Louvre castle in the 13th Century, the Louvre was converted
+            to a museum during the French Revolution, as a way to display artwork of the nation.
+            The Louvre is the most visited museum globally, with approximately 9 million visitors
+            annually. It is mostly known as the home to the Mona Lisa and Venus of Milo.
+        </p>
+    </section>
+    <section id="mdorsay">
+        <h3>Musée d'Orsay</h3>
+        
+            <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart3);
+
+      function drawChart3() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Visitors'],
+          ['2008',  3030000],
+          ['2009',  3020000],
+          ['2010',  2990000],
+          ['2011',  3150000],
+          ['2012',  3600000],
+          ['2013',  3500000],
+          ['2014',  3500000],
+          ['2015',  3440000],
+          ['2016',  3000000],
+          ['2017',  3250000],
+          ['2018',  3170000]
+            
+        ]);
+
+        var options = {
+          title: "Annual Visitors to Musée D'Orsay",
+            vAxis:{
+                format: 'short'
+            },
+            colors: ['#7CA5B8']
+            
+        };
+
+        var chart3 = new google.visualization.LineChart(document.getElementById('chart3'));
+
+        chart3.draw(data, options);
+      }
+    </script>
+    <div id="chart3" style="width: 850px; float; border: solid black 1px"></div>
+        <p>
+            The Musée d'Orsay is housed within the former Gare d'Orsay, which was
+            a Beaux-Arts railway station built in the late 1800's. The museum holds 
+            mainly French paintings, sculptures and photography from the time period
+            of 1848 - 1914. It is mostly famous for its collection of impressionist
+            paintings, namely from Monet, Renoir and Pissarro. It is the 10th globally
+            most visited museum, and 3rd nationally.
+        </p>
+    </section>
+    <section id="eiffel">
+        <h3>Eiffel Tower</h3>
+        
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart4);
+
+      function drawChart4() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Visitors'],
+          ['2011',  7080000],
+          ['2012',  6270000],
+          ['2013',  6740000],
+          ['2014',  7100000],
+          ['2015',  6920000],
+          ['2016',  5840000],
+          ['2017',  6230000],
+          ['2018',  6070000]
+            
+        ]);
+
+        var options = {
+          title: "Annual Visitors to the Eiffel Tower",
+            vAxis:{
+                format: 'short'
+            },
+            colors: ['#38369A']
+            
+        };
+
+        var chart4 = new google.visualization.LineChart(document.getElementById('chart4'));
+
+        chart4.draw(data, options);
+      }
+    </script>
+    <div id="chart4" style="width: 850px; float; border: solid black 1px"></div>
+        
+        <p>
+            Constructed in 1887, it was considered an architectural achievement
+            upon its completion only 2 years later. The tower itself was only
+            meant to last 20 years as a commemoration of the centennial of the
+            French Revolution, however it was retained due to its purpose
+            in scientific experiments, such as enabling the first radio transmissions,
+            telecommunications and television broadcasts.
+
+        </p>
+    </section>
+    <section id="gpalais">
+        <h3>Grand Palais</h3>
+        
+                    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart5);
+
+      function drawChart5() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Visitors'],
+          ['2013',  1420000],
+          ['2014',  1860000],
+          ['2015',  1740000],
+          ['2016',  1130000],
+          ['2017',  1410000]
+            
+        ]);
+
+        var options = {
+          title: "Annual Visitors to Grand Palais",
+            vAxis:{
+                format: 'short'
+            },
+            colors: ['#6B6054']
+            
+        };
+
+        var chart5 = new google.visualization.LineChart(document.getElementById('chart5'));
+
+        chart5.draw(data, options);
+      }
+    </script>
+    <div id="chart5" style="width: 850px; float; border: solid black 1px"></div>
+        
+        <p>
+            The Grand Palais des Champs-Élysées was constructed in 1897 following
+            the demolition of the Palais de l'Industrie, alongside its neighbouring
+            Petit Palais and Pont Alexandre III. In 2000, it officialy became listed
+            as a monument historique by the French Ministry of Culture, and is visited
+            by approximately 1.5 million people annually.
+        </p>
+    </section>
+    <section id="adtriomphe">
+        <h3>Arc de Triomphe</h3>
+        
+        <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart6);
+
+      function drawChart6() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Visitors'],
+          ['2013',  1780000],
+          ['2014',  1750000],
+          ['2015',  1760000],
+          ['2016',  1340000],
+          ['2017',  1580000],
+            
+        ]);
+
+        var options = {
+          title: 'Annual Visitors to Arc de Triomphe',
+            vAxis:{
+                format: 'short'
+            },
+            colors: ['#C68866']
+            
+        };
+
+        var chart6 = new google.visualization.LineChart(document.getElementById('chart6'));
+
+        chart6.draw(data, options);
+      }
+    </script>
+    <div id="chart6" style="width: 850px; float; border: solid black 1px"></div>
+        
+        <p>
+            The Arc de Triomphe, built in 1806, is situated in the centre of the
+            Place Charles de Gaulle, where the juncture is formed by the 12 avenues
+            surrounding it. The monument honours those who fought for French
+            during the Revolutionary and Napoleonic Wars, and sees approximately 2 
+            million visitors annually.
+        </p>
+    </section>
+    <section id="basil">
+        <h3>Sacré-Cœur</h3>
+        
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart7);
+
+      function drawChart7() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Visitors'],
+          ['2013',  11000000],
+          ['2014',  11000000],
+          ['2015',  11500000],
+          ['2016',  11000000],
+          ['2017',  10000000],
+            
+        ]);
+
+        var options = {
+          title: 'Annual Visitors to Basilique',
+            vAxis:{
+                format: 'short'
+            },
+            colors: ['#C69DD2']
+            
+        };
+
+        var chart7 = new google.visualization.LineChart(document.getElementById('chart7'));
+
+        chart7.draw(data, options);
+      }
+    </script>
+    <div id="chart7" style="width: 850px; float; border: solid black 1px"></div>
+        
+        <p>
+            The Basilica of the Sacred Heart of Paris, or more commonly known 
+            as Sacré-Cœur, it a Roman Catholic church, dedicated to the Sacred 
+            Heard of Jesus. Built in 1919, it is the 9th most visited Disney
+            theme park, but is the 2nd most visited tourist denstination in
+            Paris, with approximately 11 million visitors annually.
+        </p>
+    </section>
+    <section id="disney">
+        <h3>Disneyland Paris</h3>
+        
+        <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart8);
+
+      function drawChart8() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Visitors'],
+          ['2009', 12740000],
+          ['2010', 10500000],
+          ['2011', 10990000],
+          ['2012', 10430000],
+          ['2013',  9940000],
+          ['2014',  9790000],
+          ['2015',  8400000],
+          ['2016',  9660000],
+          ['2017',  9840000],
+            
+        ]);
+
+        var options = {
+          title: 'Annual Visitors to Disneyland Paris',
+            vAxis:{
+                format: 'short'
+            },
+            colors: ['#CC8B8C']
+            
+        };
+
+        var chart8 = new google.visualization.LineChart(document.getElementById('chart8'));
+
+        chart8.draw(data, options);
+      }
+    </script>
+    <div id="chart8" style="width: 850px; float; border: solid black 1px"></div>
+        
+        <p>
+            Built 10 years after the original theme park in the US, Disneyland Paris
+            has seen approximately 320 million visitors since its gates first opened in 2002.
+            There are an average 10 million visitors per year, making it the 9th most visited 
+            Disney theme park globally, and the 3rd most visited attraction in Paris.
+        </p>
+    </section>
+    <section>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <small id="citation">
+            <style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+             <img src="https://www.ucl.ac.uk/bartlett/casa/sites/bartlett/files/styles/medium_image/public/casalogo1_4.jpg" alt="ucl.ac.uk/bartlett/casa"
+                  width = "200" height = "125" class = "center" > 
+            
+            <br> <center>Visualisations created by CASA Group 6</center> 
+        </small>
+    </section>
+</div>
+    
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoiemFhYWFhbmEiLCJhIjoiY2s1aTM3aXpuMDloMjNub3luczlxMTg0bCJ9.zwbUcoO7gjuL-qFhjZ17YA';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/zaaaaana/ckad38w8b028g1imow56ofjpp',
+        center: [2.349902, 48.852966],
+        zoom: 18,
+        bearing: 27,
+        pitch: 45
+    });
+
+    var chapters = {
+        'notred': {
+            bearing: 27,
+            center: [2.349902, 48.852966],
+            zoom: 18,
+            pitch: 60
+        },
+        'pompidou': {
+            duration: 6000,
+            center: [2.3522, 48.8606],
+            bearing: -30,
+            zoom: 18.5,
+            pitch: 60
+        },
+        'louvre': {
+            duration: 6000,
+            center: [2.3376, 48.8606],
+            bearing: 150,
+            zoom: 16.5,
+            pitch: 60
+        },
+        'mdorsay': {
+            bearing: 90,
+            center: [2.3266, 48.8600],
+            zoom: 16.5,
+            speed: 0.6,
+            pitch: 40
+        },
+        'eiffel': {
+            bearing: 90,
+            center: [2.2945, 48.8584],
+            zoom: 16.5,
+            pitch: 60
+        },
+        'gpalais': {
+            bearing: 45,
+            center: [2.3125, 48.8661],
+            zoom: 16.3,
+            pitch: 50,
+            speed: 0.5
+        },
+        'adtriomphe': {
+            bearing: 180,
+            center: [2.2950, 48.8738],
+            zoom: 19.3,
+            pitch: 60
+        },
+        'basil': {
+            bearing: 90,
+            center: [2.3431, 48.8867],
+            zoom: 19,
+            pitch: 60
+        },
+        'disney': {
+            bearing: -180,
+            center: [2.7912, 48.8616],
+            zoom: 13,
+            pitch: 60
+        }
+    };
+
+    // On every scroll event, check which element is on screen
+    window.onscroll = function() {
+        var chapterNames = Object.keys(chapters);
+        for (var i = 0; i < chapterNames.length; i++) {
+            var chapterName = chapterNames[i];
+            if (isElementOnScreen(chapterName)) {
+                setActiveChapter(chapterName);
+                break;
+            }
+        }
+    };
+
+    var activeChapterName = 'notred';
+    function setActiveChapter(chapterName) {
+        if (chapterName === activeChapterName) return;
+
+        map.flyTo(chapters[chapterName]);
+
+        document.getElementById(chapterName).setAttribute('class', 'active');
+        document.getElementById(activeChapterName).setAttribute('class', '');
+
+        activeChapterName = chapterName;
+    }
+
+    function isElementOnScreen(id) {
+        var element = document.getElementById(id);
+        var bounds = element.getBoundingClientRect();
+        return bounds.top < window.innerHeight && bounds.bottom > 0;
+    }
+</script>
+    <img id="egggif" src="https://media.giphy.com/media/26CaLWA2dcqz6hS4U/giphy.gif">
+</body>
+</html>
